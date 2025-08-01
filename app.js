@@ -5,6 +5,8 @@ const connectDB = require("./config/db"); // Import DB connection
 
 // Import routes
 const authRoutes = require("./routes/authRoutes");
+const partnerRoutes = require("./routes/partnerRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 // Connect to Database
 connectDB();
@@ -22,6 +24,8 @@ app.get("/", (req, res) => {
 
 // --- ROUTES ---
 app.use("/api/auth", authRoutes);
+app.use("/api/partner", partnerRoutes);
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 3000;
 
