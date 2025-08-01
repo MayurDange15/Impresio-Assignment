@@ -1,4 +1,6 @@
 const PartnerProfile = require("../models/partnerProfileModel");
+const User = require("../models/userModel");
+const Inquiry = require("../models/inquiryModel");
 
 // Admin: Get all pending verifications
 exports.getPendingVerifications = async (req, res) => {
@@ -57,5 +59,31 @@ exports.processVerification = async (req, res) => {
     });
   } catch (err) {
     res.status(400).json({ status: "fail", message: err.message });
+  }
+};
+
+// Admin: Get high-level KPIs
+exports.getStats = async (req, res) => {
+  try {
+    const totalClients = await User.countDocuments({ role: "client" });
+    const totalPartners = await User.countDocuments({ role: "partner" });
+    const pendingVerifications = await PartnerProfile.countDocuments({
+      verificationStatus: "pending",
+    });
+    const totalInquiries = await Inquiry.countDocuments();
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        stats: {
+          totalClients,
+          totalPartners,
+          pendingVerifications,
+          totalInquiries,
+        },
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ status: "error", message: "Something went wrong." });
   }
 };

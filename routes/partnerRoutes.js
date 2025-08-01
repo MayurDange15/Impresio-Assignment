@@ -13,4 +13,15 @@ router.use(authMiddleware.restrictTo("partner"));
 router.post("/profile", partnerController.submitProfile);
 router.get("/leads", partnerController.getAssignedLeads);
 
+// Portfolio Routes
+router
+  .route("/portfolio")
+  .post(partnerController.addPortfolioItem)
+  .get(partnerController.getPortfolio);
+
+router
+  .route("/portfolio/:id")
+  .put(partnerController.updatePortfolioItem)
+  .delete(partnerController.deletePortfolioItem);
+
 module.exports = router;

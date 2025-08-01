@@ -12,5 +12,6 @@ router.use(authMiddleware.restrictTo("admin"));
 
 router.get("/verifications", adminController.getPendingVerifications);
 router.put("/verify/:id", adminController.processVerification);
+router.get("/stats", adminController.getStats);
 
 module.exports = router;
