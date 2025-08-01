@@ -1,0 +1,30 @@
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/db"); // Import DB connection
+
+// Import routes
+const authRoutes = require("./routes/authRoutes");
+
+// Connect to Database
+connectDB();
+
+const app = express();
+
+// Middlewares
+app.use(cors());
+app.use(express.json()); // This allows your app to accept JSON data
+
+// A simple test route to make sure everything is working
+app.get("/", (req, res) => {
+  res.send("Pixisphere API is running! 🚀");
+});
+
+// --- ROUTES ---
+app.use("/api/auth", authRoutes);
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
