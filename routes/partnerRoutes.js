@@ -11,5 +11,6 @@ router.use(authMiddleware.protect);
 router.use(authMiddleware.restrictTo("partner"));
 
 router.post("/profile", partnerController.submitProfile);
+router.get("/leads", partnerController.getAssignedLeads);
 
 module.exports = router;
