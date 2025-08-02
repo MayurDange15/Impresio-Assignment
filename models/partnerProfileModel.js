@@ -35,6 +35,10 @@ const partnerProfileSchema = new mongoose.Schema({
   rejectionComment: {
     type: String,
   },
+  featured: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // So a user can only have one profile

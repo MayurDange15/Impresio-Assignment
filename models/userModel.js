@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema({
     enum: ["client", "partner", "admin"], // These are the only possible values
     required: [true, "Please specify a role"],
   },
+  otp: {
+    type: String,
+  },
 });
 
 // This is a middleware that runs BEFORE a user is saved to the database

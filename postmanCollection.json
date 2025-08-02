@@ -1,0 +1,256 @@
+{
+  "info": {
+    "_postman_id": "a8a0c4c4-5c9c-4c4c-8c9c-4c4c4c4c4c4c",
+    "name": "Impresio",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "partnerProfileId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"client\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/signup",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Inquiry",
+      "item": [
+        {
+          "name": "Create Inquiry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"category\": \"wedding\",\n    \"city\": \"Delhi\",\n    \"budget\": 50000,\n    \"eventDate\": \"2025-12-10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/inquiry",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "inquiry"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Partner",
+      "item": [
+        {
+          "name": "Submit Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"serviceDetails\": \"Candid wedding photography\",\n    \"aadharNumber\": \"123456789012\",\n    \"portfolioUrl\": \"https://example.com/portfolio\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/partner/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "partner", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Assigned Leads",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/partner/leads",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "partner", "leads"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Portfolio Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"imageUrl\": \"https://example.com/image.jpg\",\n    \"description\": \"A beautiful wedding photo\",\n    \"orderIndex\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/partner/portfolio",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "partner", "portfolio"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Pending Verifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/verifications",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "verifications"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Process Verification",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"verified\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/verify/{{partnerProfileId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "verify", "{{partnerProfileId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

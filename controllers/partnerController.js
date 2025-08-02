@@ -1,5 +1,6 @@
 const PartnerProfile = require("../models/partnerProfileModel");
 const PortfolioItem = require("../models/portfolioItemModel");
+const Inquiry = require("../models/inquiryModel");
 
 exports.submitProfile = async (req, res) => {
   try {
